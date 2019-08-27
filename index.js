@@ -6,9 +6,25 @@ let map = new mapboxgl.Map({
     center:[-1.615800,6.695070],
     zoom:13
 });
+//registering service Worker
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+};
 //adding marker attach empty div to each point in your jeoJson point
 //so you have to style the markers before adding the points
 let  geojson = [
+  {
+   name:"Aboabo",
+   coordinates:[-1.597553,6.701252]
+  },
+  {name:"Adoato",
+   coordinates:[-1.648121,6.707560]
+  },
+  {
+    name:"Dr Addo Kuffour Avenue",
+    coordinates:[-1.636791,6.691704]
+  }
+  ,
   {
     name: "Ofori Kurom",
     coordinates:[-1.591188,6.684993]
@@ -36,7 +52,6 @@ list.className ='searchList';
 const container = document.querySelector('#sidebar');
 const currentMarker = [];
 const input = document.querySelector('#search');
-
 geojson.forEach((location)=>{
    const marker = new mapboxgl.Marker()
     .setLngLat([location.coordinates[0],location.coordinates[1]])
@@ -84,9 +99,22 @@ let toggleMenuBar =()=>{
   }else{
     sideBar.style.display = 'block'
   }
-  
 };
+//show only clicked items
+const listElements = document.querySelectorAll('li');
+listElements.forEach(item=>{
+  item.addEventListener('click',(event)=>{
+      geojson.forEach(location =>{
+        location.marker.remove();
+      });   
+      geojson.forEach(location =>{
+        if(location.name.search(event.target.textContent) !==-1){
+          location.marker.addTo(map);
+          list.appendChild(location.listItem);
+          container.appendChild(list);
+        }
+      });
+  });
+})
 document.querySelector('#sidebar-btn').addEventListener('click',toggleMenuBar,false);
 document.querySelector('#search').addEventListener('keydown',searchLocation,false);
-
-

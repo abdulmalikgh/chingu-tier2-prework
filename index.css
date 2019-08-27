@@ -3,7 +3,7 @@ body{
     padding:0;
 }
 #map{
-    width:100%;
+    width:100vw;
     position: absolute;;
     top:0;
     bottom:0;
@@ -47,10 +47,9 @@ border-radius:10px;
     color:#fff;
     width: 230px;
     background-color: #272626;
-    height: 80%;
+    height: 82%;
     position: fixed;
     top: 80px;
-    left:0;
     z-index: 1;
     text-align: center;
     border-top-right-radius: 15px;
@@ -59,16 +58,50 @@ border-radius:10px;
 }
 .searchList{
 width:160px;
-float:left;
-margin-left:0px;
 }
 .searchListItem{
 list-style-type:none;
-line-height:25px;
+line-height:20px;
 font-size:20px;
 padding:10px;
 border-bottom:2px solid white;
 }
-#sidebar .searchList .searchListItem:hover{
-border-radius:1px solid violet;
+div ul li:hover{
+    color:red;
+    border:1px solid red;
+    cursor:pointer;
 }
+/*Responsive design*/
+@media(max-width:640px){
+    #sidebar-btn{
+        width:50px;
+        height:50px;
+        padding:10px;
+    }
+        #search{
+            width:120px;
+            height:20px;
+            padding: 8px;
+            border-radius:7px;
+            }
+            #sidebar{
+                margin:none;
+                padding:none;
+                opacity:0.8;
+                max-width:150px;
+                background-color: #272626;
+                height: 80%;
+                top: 65px;  
+                display:none;
+            }
+            .searchList{
+                width:100px;
+                }
+            .searchListItem{
+            line-height:18px;
+            font-size:15px;
+            text-align: center;
+            border-bottom:1px solid white;
+             }
+}
+
