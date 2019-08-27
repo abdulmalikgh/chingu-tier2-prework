@@ -6,10 +6,7 @@ let map = new mapboxgl.Map({
     center:[-1.615800,6.695070],
     zoom:13
 });
-//registering service Worker
-if('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-};
+
 //adding marker attach empty div to each point in your jeoJson point
 //so you have to style the markers before adding the points
 let  geojson = [
@@ -108,7 +105,7 @@ listElements.forEach(item=>{
         location.marker.remove();
       });   
       geojson.forEach(location =>{
-        if(location.name.search(event.target.textContent) !==-1){
+        if(location.name.search(event.target.textContent)){
           location.marker.addTo(map);
           list.appendChild(location.listItem);
           container.appendChild(list);
