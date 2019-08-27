@@ -46,7 +46,7 @@ let  geojson = [
 //adding markers 
 const list = document.createElement('ul');
 list.className ='searchList';
-const container = document.querySelector('#sidebar');
+const container = document.getElementById('sidebar');
 const currentMarker = [];
 const input = document.querySelector('#search');
 geojson.forEach((location)=>{
@@ -79,7 +79,7 @@ let searchLocation = ()=>{
       container.appendChild(list)
     })
   }  
- let find = new RegExp(`${input.value}`,'gi');
+ let find = input.value;
  geojson.forEach(location=>{
    if(location.name.search(find) !== -1){
      location.marker.addTo(map);
@@ -97,21 +97,5 @@ let toggleMenuBar =()=>{
     sideBar.style.display = 'block'
   }
 };
-//show only clicked items
-const listElements = document.querySelectorAll('li');
-listElements.forEach(item=>{
-  item.addEventListener('click',(event)=>{
-      geojson.forEach(location =>{
-        location.marker.remove();
-      });   
-      geojson.forEach(location =>{
-        if(location.name.search(event.target.textContent)){
-          location.marker.addTo(map);
-          list.appendChild(location.listItem);
-          container.appendChild(list);
-        }
-      });
-  });
-})
 document.querySelector('#sidebar-btn').addEventListener('click',toggleMenuBar,false);
-document.querySelector('#search').addEventListener('keydown',searchLocation,false);
+document.querySelector('#search').addEventListener('keyup',searchLocation,false);
